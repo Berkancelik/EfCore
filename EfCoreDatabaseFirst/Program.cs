@@ -1,12 +1,12 @@
-﻿using System;
+﻿using EfCoreDatabaseFirst.DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using System;
 
-namespace EfCoreDatabaseFirst
+using (var _context = new AppDbContext())
 {
-    class Program
+    var products = await _context.Products.ToListAsync();
+    products.ForEach(p =>
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
-    }
+        Console.WriteLine($"{p.Id}:{p.Name}");
+    });
 }
