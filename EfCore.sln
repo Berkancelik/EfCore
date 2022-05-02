@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfCoreDatabaseFirst", "EfCoreDatabaseFirst\EfCoreDatabaseFirst.csproj", "{E64B2919-A0D6-48E1-854E-48D1D2EEB399}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EfCoreDatabaseFirst", "EfCoreDatabaseFirst\EfCoreDatabaseFirst.csproj", "{E64B2919-A0D6-48E1-854E-48D1D2EEB399}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.DatabaseFirstByScaffold", "EFCore.DatabaseFirstByScaffold\EFCore.DatabaseFirstByScaffold.csproj", "{A2517E40-B6D7-4B9E-BF23-68F58428F189}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.DatabaseFirstByScaffold", "EFCore.DatabaseFirstByScaffold\EFCore.DatabaseFirstByScaffold.csproj", "{A2517E40-B6D7-4B9E-BF23-68F58428F189}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfCore.CodeFirst", "EfCore.CodeFirst\EfCore.CodeFirst.csproj", "{EDA69C59-B356-4CAD-A423-E029E5762688}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A2517E40-B6D7-4B9E-BF23-68F58428F189}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2517E40-B6D7-4B9E-BF23-68F58428F189}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2517E40-B6D7-4B9E-BF23-68F58428F189}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDA69C59-B356-4CAD-A423-E029E5762688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDA69C59-B356-4CAD-A423-E029E5762688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDA69C59-B356-4CAD-A423-E029E5762688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDA69C59-B356-4CAD-A423-E029E5762688}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
