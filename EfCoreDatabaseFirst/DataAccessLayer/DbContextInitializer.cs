@@ -20,8 +20,8 @@ namespace EfCoreDatabaseFirst.DataAccessLayer
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
             Configuration = builder.Build();
-            OptionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            OptionsBuilder.UseSqlServer(Configuration.GetConnectionString("SqlCon"));
+            //OptionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            //OptionsBuilder.UseSqlServer(Configuration.GetConnectionString("SqlCon"));
         }
 
     }
