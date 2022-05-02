@@ -11,12 +11,17 @@ namespace EfCoreDatabaseFirst.DataAccessLayer
     {
         public DbSet<Product> Products { get; set; }
 
+        // options da veritabanı üzerindeki tüm ayarları gerçekleştirir.
 
-        // aşağıda Sql için bağlantı alanı açılmaktadır.
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public AppDbContext()
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-IITT7DV;Initial Catalog=EFCoreDatabaseFirstDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
         }
+        public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
+        {
+
+        }
+      
 
     }
 }
