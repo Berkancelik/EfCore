@@ -8,16 +8,37 @@ Initializer.Build();
 using (var _context = new AppDbContext())
 {
 
+    var products = _context.Products.ToList();
+
+    products.ForEach(p =>
+    {
+        p.Stock += 100;
+    });
+
+        _context.ChangeTracker.Entries().ToList().ForEach(e =>
+       {
+           if (e.Entity is Product p)
+           {
+               Console.WriteLine(e.State);
+           }
+       });
+
+        _context.SaveChanges();
 
 
-    _context.Products.Add(new() { Name = "Kalem 1", Price = 200, Stock = 100, Barcode = 123});
-    _context.Products.Add(new() { Name = "Kalem 1", Price = 200, Stock = 100, Barcode = 123});
-    _context.Products.Add(new() { Name = "Kalem 1", Price = 200, Stock = 100, Barcode = 123});
+    
 
 
-    Console.WriteLine($"Context Id : {_context.ContextId}");
+
+
+    //_context.Products.Add(new() { Name = "Kalem 1", Price = 200, Stock = 100, Barcode = 123});
+    //_context.Products.Add(new() { Name = "Kalem 1", Price = 200, Stock = 100, Barcode = 123});
+    //_context.Products.Add(new() { Name = "Kalem 1", Price = 200, Stock = 100, Barcode = 123});
+
+
+    //Console.WriteLine($"Context Id : {_context.ContextId}");
    
-    _context.SaveChanges();
+    //_context.SaveChanges();
 
 
 
