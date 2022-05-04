@@ -19,6 +19,21 @@ namespace EfCore.CodeFirst.Migrations
                 .HasAnnotation("ProductVersion", "5.0.16")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("EfCore.CodeFirst.DAL.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("EfCore.CodeFirst.DAL.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -29,8 +44,8 @@ namespace EfCore.CodeFirst.Migrations
                     b.Property<int>("Barcode")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -43,7 +58,21 @@ namespace EfCore.CodeFirst.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("EfCore.CodeFirst.DAL.Product", b =>
+                {
+                    b.HasOne("EfCore.CodeFirst.DAL.Category", null)
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId");
+                });
+
+            modelBuilder.Entity("EfCore.CodeFirst.DAL.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,28 +11,23 @@ namespace EfCore.CodeFirst.DAL
     public class AppDbContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             Initializer.Build();
             optionsBuilder.UseSqlServer(Initializer.Configuration.GetConnectionString("SqlCon"));
 
-        }
 
-        public override int SaveChanges()
+            
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            ChangeTracker.Entries().ToList().ForEach(e =>
-            {
-                if (e.Entity is Product p)
-                {
-                    if (e.State == EntityState.Added)
-                    {
-                        p.CreatedDate = DateTime.Now;
-                    }
-
-                }
-            });
-            return base.SaveChanges();  
+            // Fluent API ile tanımlama
+            // her zaman has ile başlanması gerekemktedir
+            // aşağıdaki kod bloğu ile birlikte product içeriisnmde birden çok category geçebiliriz
+        //    modelBuilder.Entity<Category>().HasMany(x => x.Products).WithOne(x => x.Category).HasForeignKey(x => x.Category_Id);
         }
+
     }
 }
