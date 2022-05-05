@@ -10,7 +10,7 @@ namespace EfCore.CodeFirst.DAL
 {
     public class ProductFeature
     {
-        [Key,ForeignKey("Product")]
+        [ForeignKey("Product")]
         public int Id { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }

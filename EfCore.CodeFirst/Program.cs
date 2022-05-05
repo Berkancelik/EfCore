@@ -7,12 +7,13 @@ using System.Linq;
 Initializer.Build();
 using (var _context = new AppDbContext())
 {
-    var category = new Category() { Name = "Kalemler" };
-    var product = new Product() { Name = "Kalem", Price = 100, Stock = 200, Barcode = 123, Category = category };
+    //Product => Parent
+    //ProductFeature => Child
 
-
+    var product = new Product { Name = "Kalem", Price = 200, Stock = 200, Barcode = 123, Category = new() { Name = "Silgiler" } };
     _context.Products.Add(product);
     _context.SaveChanges();
+    Console.WriteLine("Kayıt Edildi");
 }
 
 
