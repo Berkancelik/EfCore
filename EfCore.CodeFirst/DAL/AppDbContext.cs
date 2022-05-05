@@ -24,12 +24,10 @@ namespace EfCore.CodeFirst.DAL
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Fluent API ile tanımlama
-            // her zaman has ile başlanması gerekemktedir
-            // aşağıdaki kod bloğu ile birlikte product içeriisnmde birden çok category geçebiliriz
-            //    modelBuilder.Entity<Category>().HasMany(x => x.Products).WithOne(x => x.Category).HasForeignKey(x => x.Category_Id);
-            modelBuilder.Entity<Product>().HasOne(x => x.ProductFeature).WithOne(x => x.Product).HasForeignKey<ProductFeature>(x => x.Product_Id);
-                base.OnModelCreating(modelBuilder);
+          
+          
+            //modelBuilder.Entity<Product>().HasOne(x => x.ProductFeature).WithOne(x => x.Product).HasForeignKey<ProductFeature>(x => x.Id);
+            //    base.OnModelCreating(modelBuilder);
         }
 
     }
