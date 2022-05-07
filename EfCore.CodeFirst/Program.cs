@@ -8,12 +8,10 @@ using System.Linq;
 Initializer.Build();
 using (var _context = new AppDbContext())
 {
-     var product = _context.Products.First();
-    if (true)
-    {
-        _context.Entry(product).Reference(x => x.ProductFeature).Load();
-   
-    }
+     var category = await _context.Categories.FirstAsync();
+
+    var products = category.Products;
+    Console.WriteLine("İşlem Bitti");
 }
 
 
