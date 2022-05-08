@@ -10,10 +10,12 @@ namespace EfCore.CodeFirst.DAL
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Product> Products { get; set; }
-
-        public DbSet<ProductFeature> ProductFeature { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<BasePerson> Persons { get; set; }
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        //public DbSet<Product> Products { get; set; }
+        //public DbSet<ProductFeature> ProductFeature { get; set; }
+        //public DbSet<Category> Categories { get; set; }
         //public DbSet<Student> Students { get; set; }
         //public DbSet<Teacher> Teachers { get; set; }
 
@@ -26,11 +28,11 @@ namespace EfCore.CodeFirst.DAL
             //Error
             //Critical
             Initializer.Build();
-            optionsBuilder.LogTo(Console.WriteLine,Microsoft.Extensions.Logging.LogLevel.Information).UseLazyLoadingProxies().UseSqlServer(Initializer.Configuration.GetConnectionString("SqlCon"));
+            optionsBuilder.UseSqlServer(Initializer.Configuration.GetConnectionString("SqlCon"));
         }
-         
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {      
+        {
             base.OnModelCreating(modelBuilder);
         }
 
