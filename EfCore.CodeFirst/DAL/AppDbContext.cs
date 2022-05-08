@@ -33,6 +33,9 @@ namespace EfCore.CodeFirst.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<BasePerson>().ToTable("Persons");
+            modelBuilder.Entity<Employee>().ToTable("Employees");
+            modelBuilder.Entity<Manager>().ToTable("Managers");
             base.OnModelCreating(modelBuilder);
         }
 
