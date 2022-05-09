@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 Initializer.Build();
-using (var _context = new AppDbContext())
+using (var _context = new AppDbContext()) 
 {
     //var managers = _context.Managers.ToList();
     //var employee = _context.Employees.ToList();
