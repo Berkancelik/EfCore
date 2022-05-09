@@ -32,9 +32,7 @@ using (var _context = new AppDbContext())
 
 
 
-    _context.Managers.Add(new Manager() { FirstName = "Manager 1", LastName = "asd", Age = 24, Grade = 1 });
-    _context.Employees.Add(new Employee() { FirstName = "Employee 1", LastName = "asd", Age = 24, Salary = 10000 });
-    _context.SaveChanges();
+
 }
 
 

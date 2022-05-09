@@ -10,7 +10,6 @@ namespace EfCore.CodeFirst.DAL
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<BasePerson> Persons { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         //public DbSet<Product> Products { get; set; }
@@ -33,9 +32,21 @@ namespace EfCore.CodeFirst.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BasePerson>().ToTable("Persons");
-            modelBuilder.Entity<Employee>().ToTable("Employees");
-            modelBuilder.Entity<Manager>().ToTable("Managers");
+            modelBuilder.Entity<Manager>().OwnsOne(x => x.Person,p=>
+            {
+                p.Property(x=>x.FirstName).HasColumnName("FirstName");
+                p.Property(x=>x.LastName).HasColumnName("LastName");
+                p.Property(x=>x.Age).HasColumnName("Age");
+            });
+
+            modelBuilder.Entity<Employee>().OwnsOne(x => x.Person, p =>
+            {
+                p.Property(x => x.FirstName).HasColumnName("FirstName");
+                p.Property(x => x.LastName).HasColumnName("LastName");
+                p.Property(x => x.Age).HasColumnName("Age");
+            });
+            modelBuilder.Entity<Employee>().OwnsOne(x => x.Person);
+      
             base.OnModelCreating(modelBuilder);
         }
 
