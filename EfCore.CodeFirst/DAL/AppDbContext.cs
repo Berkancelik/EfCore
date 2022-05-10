@@ -27,7 +27,7 @@ namespace EfCore.CodeFirst.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>().Property(x => x.Url).HasColumnType("nvarchar(200)");
+            modelBuilder.Entity<Product>().HasIndex(x => x.Name).IncludeProperties(x=> new {x.Price, x.Stock});
             base.OnModelCreating(modelBuilder);
         }
 

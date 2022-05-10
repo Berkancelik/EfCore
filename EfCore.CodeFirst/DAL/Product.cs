@@ -8,25 +8,19 @@ using System.Threading.Tasks;
 
 namespace EfCore.CodeFirst.DAL
 {
+    [Index(nameof(Name),nameof(Url))]
     public class Product
     {
+
+        // Index tablosuna gidiyor kalem1 aslı1 tablodaki yerini buluyor
+        // asıl product tablosunda id,name,url
+        // ceontext.products.where(x=>x.name="kalem1").select(x=>new{name=>x.Name, Price = x.Price})
         public int Id { get; set; }
-
-
-        [Unicode(false)] // varchar
         public string Name { get; set; }
-
-        [Column(TypeName ="varchar(200)")]
         public string Url { get; set; }
-
-        //[Precision(18, 2)]
         public decimal Price { get; set; }
- 
         public int Stock { get; set; }
-
-        [NotMapped]
         public int Barcode { get; set; }
-
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
         public virtual ProductFeature ProductFeature { get; set; }
