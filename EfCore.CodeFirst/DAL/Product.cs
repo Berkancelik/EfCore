@@ -12,9 +12,7 @@ namespace EfCore.CodeFirst.DAL
     public class Product
     {
 
-        // Index tablosuna gidiyor kalem1 aslı1 tablodaki yerini buluyor
-        // asıl product tablosunda id,name,url
-        // ceontext.products.where(x=>x.name="kalem1").select(x=>new{name=>x.Name, Price = x.Price})
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
