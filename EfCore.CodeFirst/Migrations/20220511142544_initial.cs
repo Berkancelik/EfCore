@@ -10,7 +10,7 @@ namespace EfCore.CodeFirst.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -19,25 +19,11 @@ namespace EfCore.CodeFirst.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "People",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_People", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Product",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -51,11 +37,11 @@ namespace EfCore.CodeFirst.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Product_Category_CategoryId",
+                        name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Category",
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -73,43 +59,40 @@ namespace EfCore.CodeFirst.Migrations
                 {
                     table.PrimaryKey("PK_ProductFeature", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductFeature_Product_Id",
+                        name: "FK_ProductFeature_Products_Id",
                         column: x => x.Id,
-                        principalTable: "Product",
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_CategoryId",
-                table: "Product",
+                name: "IX_Products_CategoryId",
+                table: "Products",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_Name",
-                table: "Product",
+                name: "IX_Products_Name",
+                table: "Products",
                 column: "Name")
                 .Annotation("SqlServer:Include", new[] { "Price", "Stock" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_Name_Url",
-                table: "Product",
+                name: "IX_Products_Name_Url",
+                table: "Products",
                 columns: new[] { "Name", "Url" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "People");
-
-            migrationBuilder.DropTable(
                 name: "ProductFeature");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Categories");
         }
     }
 }

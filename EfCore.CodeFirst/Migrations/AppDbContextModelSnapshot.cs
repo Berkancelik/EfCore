@@ -35,26 +35,7 @@ namespace EfCore.CodeFirst.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("EfCore.CodeFirst.DAL.Person", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("People");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("EfCore.CodeFirst.DAL.Product", b =>
@@ -93,7 +74,7 @@ namespace EfCore.CodeFirst.Migrations
 
                     b.HasIndex("Name", "Url");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("EfCore.CodeFirst.DAL.ProductFeature", b =>
