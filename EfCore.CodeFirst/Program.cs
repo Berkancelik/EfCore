@@ -8,13 +8,9 @@ using System.Linq;
 Initializer.Build();
 using (var _context = new AppDbContext())
 {
-    var products = await _context.ProductEssentials.FromSqlRaw("select  Name,Price from products").ToListAsync();
 
 
-    var productsWithFeature = await _context.ProductWithFeatures.FromSqlRaw("select p.Id,p.Name,p.Price, pf.Color,pf.Height  from Products p inner join  ProductFeatures pf on p.Id = pf.Id ").ToListAsync();
-
-    Console.WriteLine("");
-
+    var products = _context.ProductFulls.ToList();
 
 
     //var category = new Category() { Name = "Kalemler" };
