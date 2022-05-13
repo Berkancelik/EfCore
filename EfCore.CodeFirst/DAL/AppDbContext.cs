@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EfCore.CodeFirst.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -11,23 +12,32 @@ namespace EfCore.CodeFirst.DAL
     public class AppDbContext : DbContext
     {
 
+
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductFeature> ProductFeature { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductFeature> productFeatures { get; set; }
+
+        public DbSet<ProductEssential> ProductEssentials { get; set; }
+
+        public DbSet<ProductWithFeature> ProductWithFeatures { get; set; }
+
+
         //public DbSet<Person> People { get; set; }
+        //public DbSet<Student> Students { get; set; }
+        //public DbSet<Teacher> Teachers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-      
             Initializer.Build();
-            optionsBuilder.UseSqlServer(Initializer.Configuration.GetConnectionString("SqlCon"));
+            optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information).UseSqlServer(Initializer.Configuration.GetConnectionString("SqlCon"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>().HasIndex(x => x.Name).IncludeProperties(x=> new {x.Price, x.Stock});
+
+            modelBuilder.Entity<ProductEssential>().HasNoKey();
+            modelBuilder.Entity<ProductWithFeature>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }

@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31911.196
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EfCoreDatabaseFirst", "EfCoreDatabaseFirst\EfCoreDatabaseFirst.csproj", "{E64B2919-A0D6-48E1-854E-48D1D2EEB399}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.DatabaseFirstByScaffold", "EFCore.DatabaseFirstByScaffold\EFCore.DatabaseFirstByScaffold.csproj", "{A2517E40-B6D7-4B9E-BF23-68F58428F189}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfCore.CodeFirst", "EfCore.CodeFirst\EfCore.CodeFirst.csproj", "{EDA69C59-B356-4CAD-A423-E029E5762688}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EfCore.CodeFirst", "EfCore.CodeFirst\EfCore.CodeFirst.csproj", "{EDA69C59-B356-4CAD-A423-E029E5762688}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
