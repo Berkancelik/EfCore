@@ -4,7 +4,7 @@
 
 namespace EfCore.CodeFirst.Migrations
 {
-    public partial class mig1 : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,26 +25,30 @@ namespace EfCore.CodeFirst.Migrations
                 name: "ProductEssentials",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_ProductEssentials", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductWithFeature",
+                name: "ProductFulls",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Width = table.Column<int>(type: "int", nullable: false),
                     Height = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_ProductFulls", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,12 +57,13 @@ namespace EfCore.CodeFirst.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Url = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false),
                     Barcode = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -95,11 +100,6 @@ namespace EfCore.CodeFirst.Migrations
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_Name_Url",
-                table: "Products",
-                columns: new[] { "Name", "Url" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -111,7 +111,7 @@ namespace EfCore.CodeFirst.Migrations
                 name: "ProductFeatures");
 
             migrationBuilder.DropTable(
-                name: "ProductWithFeature");
+                name: "ProductFulls");
 
             migrationBuilder.DropTable(
                 name: "Products");

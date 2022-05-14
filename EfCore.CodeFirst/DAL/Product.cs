@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace EfCore.CodeFirst.DAL
 {
-    [Index(nameof(Name),nameof(Url))]
     public class Product
     {
 
@@ -20,6 +19,7 @@ namespace EfCore.CodeFirst.DAL
         public int Stock { get; set; }
         public int Barcode { get; set; }
         public int CategoryId { get; set; }
+        public bool IsDeleted { get; set; }
         public virtual Category Category { get; set; }
         public virtual ProductFeature ProductFeature { get; set; }
 
