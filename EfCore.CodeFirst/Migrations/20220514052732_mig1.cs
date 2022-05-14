@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace EfCore.CodeFirst.Migrations
 {
-    public partial class initial : Migration
+    public partial class mig1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +19,32 @@ namespace EfCore.CodeFirst.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductEssentials",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductWithFeature",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Height = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
                 });
 
             migrationBuilder.CreateTable(
@@ -47,7 +72,7 @@ namespace EfCore.CodeFirst.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductFeature",
+                name: "ProductFeatures",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
@@ -57,9 +82,9 @@ namespace EfCore.CodeFirst.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductFeature", x => x.Id);
+                    table.PrimaryKey("PK_ProductFeatures", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductFeature_Products_Id",
+                        name: "FK_ProductFeatures_Products_Id",
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -72,12 +97,6 @@ namespace EfCore.CodeFirst.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_Name",
-                table: "Products",
-                column: "Name")
-                .Annotation("SqlServer:Include", new[] { "Price", "Stock" });
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Products_Name_Url",
                 table: "Products",
                 columns: new[] { "Name", "Url" });
@@ -86,7 +105,13 @@ namespace EfCore.CodeFirst.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProductFeature");
+                name: "ProductEssentials");
+
+            migrationBuilder.DropTable(
+                name: "ProductFeatures");
+
+            migrationBuilder.DropTable(
+                name: "ProductWithFeature");
 
             migrationBuilder.DropTable(
                 name: "Products");

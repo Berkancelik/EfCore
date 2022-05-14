@@ -15,7 +15,7 @@ namespace EfCore.CodeFirst.DAL
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<ProductFeature> productFeatures { get; set; }
+        public DbSet<ProductFeature> ProductFeatures { get; set; }
         public DbSet<ProductFull> ProductFulls { get; set; }
         public DbSet<ProductEssential> ProductEssentials { get; set; }
 
@@ -33,16 +33,7 @@ namespace EfCore.CodeFirst.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            // aşağıdaki view ismi prdouctwithfeature den gelmektedir.
-            modelBuilder.Entity<ProductFull>().ToView("productwithfeature");
-
-
-
-
-            modelBuilder.Entity<ProductEssential>().HasNoKey().ToSqlQuery("select Name, Price From Products");
-
-            modelBuilder.Entity<ProductEssential>().HasNoKey();
-            modelBuilder.Entity<ProductWithFeature>().HasNoKey();
+      
             base.OnModelCreating(modelBuilder);
         }
     }
