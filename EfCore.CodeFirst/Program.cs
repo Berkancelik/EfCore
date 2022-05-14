@@ -9,9 +9,10 @@ Initializer.Build();
 using (var _context = new AppDbContext())
 {
 
-
-    var productsWithFeatures = _context.Products.TagWith("Bu Query ürünler " +
-        "ve ürünlere bağlı özellikleri getirir").Include(x => x.ProductFeature).Where(x => x.Price > 100).ToList();
+    var product = _context.Products.AsNoTracking.First(x=> x.Id ==2);
+    product.Name = "Defter 22";
+    _context.SaveChanges();
+ 
 
     #region DataInsert
     //var category = new Category() { Name = "Defterler" };
