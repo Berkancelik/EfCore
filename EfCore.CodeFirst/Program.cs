@@ -8,8 +8,11 @@ using System.Linq;
 Initializer.Build();
 using (var _context = new AppDbContext())
 {
+    int categorId = 1;
 
-     var produdcts = await _context.ProductFulls.ToListAsync();
+     var produdcts = await  _context.ProductWithFeatures
+        .FromSqlInterpolated($"select	 * from fc_product_full_with_parameters({categorId})")
+        .ToListAsync();
     Console.WriteLine("");
     #region DataInsert
     //var category = new Category() { Name = "Defterler" };

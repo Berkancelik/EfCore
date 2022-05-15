@@ -21,7 +21,7 @@ namespace EfCore.CodeFirst.DAL
         public DbSet<ProductFull> ProductFulls { get; set; }
         //public DbSet<ProductEssential> ProductEssentials { get; set; }
 
-        //public DbSet<ProductWithFeature> ProductWithFeatures { get; set; }
+        public DbSet<ProductWithFeature> ProductWithFeatures { get; set; }
         //public DbSet<Person> People { get; set; }
         //public DbSet<Student> Students { get; set; }
         //public DbSet<Teacher> Teachers { get; set; }
