@@ -9,13 +9,8 @@ Initializer.Build();
 using (var _context = new AppDbContext())
 {
 
-
-    // Not: Aşağıda Where koşulu kullanamayız
-    var products = await _context.ProductFulls.FromSqlRaw("exec sp_get_products_full").ToListAsync();
-    // where ister isek 
-    var prdoduct2 = products.Where(x => x.Width > 200);
-
-
+     var produdcts = await _context.ProductFulls.ToListAsync();
+    Console.WriteLine("");
     #region DataInsert
     //var category = new Category() { Name = "Defterler" };
     //category.Products.Add(new() { Name = "Defter 1", Price = 100, Stock = 200, Barcode = 123, ProductFeature = new ProductFeature() { Color = "Red", Height = 200, Width = 100 } });

@@ -37,7 +37,7 @@ namespace EfCore.CodeFirst.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Product>().HasNoKey();
+            modelBuilder.Entity<Product>().ToFunction("fc_product_full");
       
             base.OnModelCreating(modelBuilder);
         }
