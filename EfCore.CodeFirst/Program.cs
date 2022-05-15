@@ -9,7 +9,11 @@ Initializer.Build();
 using (var _context = new AppDbContext())
 {
 
-    var products = await _context.Products.FromSqlRaw("exec sp_get_products").ToListAsync();
+
+    // Not: Aşağıda Where koşulu kullanamayız
+    var products = await _context.ProductFulls.FromSqlRaw("exec sp_get_products_full").ToListAsync();
+    // where ister isek 
+    var prdoduct2 = products.Where(x => x.Width > 200);
 
 
     #region DataInsert

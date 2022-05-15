@@ -18,7 +18,7 @@ namespace EfCore.CodeFirst.DAL
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
-        //public DbSet<ProductFull> ProductFulls { get; set; }
+        public DbSet<ProductFull> ProductFulls { get; set; }
         //public DbSet<ProductEssential> ProductEssentials { get; set; }
 
         //public DbSet<ProductWithFeature> ProductWithFeatures { get; set; }
@@ -36,8 +36,8 @@ namespace EfCore.CodeFirst.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-         
 
+            modelBuilder.Entity<Product>().HasNoKey();
       
             base.OnModelCreating(modelBuilder);
         }

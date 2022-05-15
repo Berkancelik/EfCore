@@ -12,6 +12,7 @@ namespace EfCore.CodeFirst.Models
         public string Name { get; set; }
         public string CategoryName { get; set; }
         public int Width { get; set; }
+        public decimal Price { get; set; }
         public int Height { get; set; }
     }
 }
