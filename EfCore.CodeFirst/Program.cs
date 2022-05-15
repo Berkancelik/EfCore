@@ -9,10 +9,8 @@ Initializer.Build();
 using (var _context = new AppDbContext())
 {
 
-    var product = _context.Products.AsNoTracking.First(x=> x.Id ==2);
-    product.Name = "Defter 22";
-    _context.SaveChanges();
- 
+    var products = await _context.Products.FromSqlRaw("exec sp_get_products").ToListAsync();
+
 
     #region DataInsert
     //var category = new Category() { Name = "Defterler" };
