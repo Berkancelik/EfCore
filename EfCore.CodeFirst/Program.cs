@@ -8,7 +8,7 @@ using System.Linq;
 Initializer.Build();
 using (var _context = new AppDbContext())
 {
-    var product = await _context.Products.Include(x=>x.Category).Include(x => x.ProductFeature).Select(x=> new
+    var product = await _context.Products.Select(x=> new
     {
         CategoryName = x.Category.Name,
         ProductName = x.Name,
