@@ -12,8 +12,10 @@ namespace EfCore.CodeFirst.DAL
     public class AppDbContext : DbContext
     {
 
-
-      
+        public  int GetProductCount(int categoryId)
+        {
+            throw new NotSupportedException("Bu method Ef Core tarafından çalıştırılmaktadır.");
+        }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -44,7 +46,10 @@ namespace EfCore.CodeFirst.DAL
         {
             modelBuilder.HasDbFunction(typeof(AppDbContext).GetMethod(nameof(GetProductWithFeatures),new[] { typeof(int) })).HasName("functionName");
             modelBuilder.Entity<Product>().ToFunction("fc_product_full");
-      
+
+            modelBuilder.HasDbFunction(typeof(AppDbContext).GetMethod(nameof(GetPrpductCount), new[] { typeof(int) })).HasName("functionName");
+            modelBuilder.Entity<Product>().ToFunction("fc_product_full");
+
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -8,7 +8,16 @@ using System.Linq;
 Initializer.Build();
 using (var _context = new AppDbContext())
 {
+
+    var count = await _context.GetProductWithFeatures(1).Where(x => x.Width > 100).ToListAsync();
+
     var product = await _context.GetProductWithFeatures(1).ToListAsync();
+
+    var categories = await _context.Categories.Select(x => new
+    {
+        CategoryName = x.Name,
+        ProductCount = _context.GetProductCount(x.Id),
+    }).ToListAsync();
 
     Console.WriteLine("");
     #region DataInsert
