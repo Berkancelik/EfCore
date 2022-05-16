@@ -26,6 +26,12 @@ namespace EfCore.CodeFirst.DAL
         //public DbSet<Student> Students { get; set; }
         //public DbSet<Teacher> Teachers { get; set; }
 
+        // not return ifadesi yerimne lambda ile içeri girebiliriz
+        public IQueryable<ProductWithFeature> GetProductWithFeatures(int categoryId)
+        {
+            return FromExpression(() => GetProductWithFeatures(categoryId));
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             Initializer.Build();
@@ -36,7 +42,7 @@ namespace EfCore.CodeFirst.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.HasDbFunction(typeof(AppDbContext).GetMethod(nameof(GetProductWithFeatures),new[] { typeof(int) })).HasName("functionName");
             modelBuilder.Entity<Product>().ToFunction("fc_product_full");
       
             base.OnModelCreating(modelBuilder);
