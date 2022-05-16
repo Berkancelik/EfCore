@@ -28,7 +28,7 @@ namespace EfCore.CodeFirst.DAL
             Initializer.Build();
             optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging
                 .LogLevel.Information).UseSqlServer(Initializer.Configuration
-                .GetConnectionString("SqlCon"))
+                .GetConnectionString("SqlCon"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,6 +1,7 @@
 ﻿using EfCore.CodeFirst;
 using EfCore.CodeFirst.DAL;
 using EfCore.CodeFirst.DTOs;
+using EfCore.CodeFirst.Mappers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,19 +11,18 @@ Initializer.Build();
 using (var _context = new AppDbContext())
 {
 
+    var productDto1 = _context.Products.Select(x => new ProductDto()
+    {
+        Id = x.Id,
+        Name = x.Name,
+        Price = x.Price,
+        Stock = x.Stock,
+    }).ToList();
 
+    var product = _context.Products.ToList();
 
+    var productDto = ObjextMapper.Mapper.Map<List<ProductDto>>(product);
     Console.WriteLine("");
-    #region DataInsert
-    //var category = new Category() { Name = "Defterler" };
-    //category.Products.Add(new() { Name = "Defter 1", Price = 100, Stock = 200, Barcode = 123, ProductFeature = new ProductFeature() { Color = "Red", Height = 200, Width = 100 } });
-    //category.Products.Add(new() { Name = "Defter 2", Price = 100, Stock = 200, Barcode = 123, ProductFeature = new ProductFeature() { Color = "Red", Height = 200, Width = 100 } });
-    //category.Products.Add(new() { Name = "Defter 3", Price = 100, Stock = 200, Barcode = 123, ProductFeature = new ProductFeature() { Color = "Red", Height = 200, Width = 100 } });
-    //category.Products.Add(new() { Name = "Defter 4", Price = 100, Stock = 200, Barcode = 123 });
-    //_context.Categories.Add(category);
-    //_context.SaveChanges();
-
-    #endregion
 
 
 
