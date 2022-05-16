@@ -21,6 +21,7 @@ namespace EfCore.CodeFirst.DAL
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
         public DbSet<ProductFull> ProductFulls { get; set; }
+        public DbSet<ProdcutCount> ProdcutCounts { get; set; }
         //public DbSet<ProductEssential> ProductEssentials { get; set; }
 
         public DbSet<ProductWithFeature> ProductWithFeatures { get; set; }
@@ -47,8 +48,9 @@ namespace EfCore.CodeFirst.DAL
             modelBuilder.HasDbFunction(typeof(AppDbContext).GetMethod(nameof(GetProductWithFeatures),new[] { typeof(int) })).HasName("functionName");
             modelBuilder.Entity<Product>().ToFunction("fc_product_full");
 
-            modelBuilder.HasDbFunction(typeof(AppDbContext).GetMethod(nameof(GetPrpductCount), new[] { typeof(int) })).HasName("functionName");
+            modelBuilder.HasDbFunction(typeof(AppDbContext).GetMethod(nameof(GetProductCount), new[] { typeof(int) })).HasName("functionName");
             modelBuilder.Entity<Product>().ToFunction("fc_product_full");
+            modelBuilder.Entity<ProdcutCount>().HasNoKey();
 
             base.OnModelCreating(modelBuilder);
         }

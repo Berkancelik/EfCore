@@ -13,6 +13,9 @@ using (var _context = new AppDbContext())
 
     var product = await _context.GetProductWithFeatures(1).ToListAsync();
 
+    int categroyId = 1;
+    var produvtCount = _context.ProdcutCounts.FromSqlInterpolated($"select select dbo.fc_product_full({categroyId}) as Count").First().Count;
+
     var categories = await _context.Categories.Select(x => new
     {
         CategoryName = x.Name,
