@@ -22,12 +22,13 @@ namespace EfCore.CodeFirst.Mappers
 
         public static IMapper Mapper => lazy.Value;
 
-    internal class CustomMapping:Profile
-    {
-        public CustomMapping()
+        internal class CustomMapping : Profile
         {
-            CreateMap<ProductDto,Product>().ReverseMap(); 
-        }
+            public CustomMapping()
+            {
+                CreateMap<ProductDto, Product>().ReverseMap();
+            }
 
+        }
     }
 }

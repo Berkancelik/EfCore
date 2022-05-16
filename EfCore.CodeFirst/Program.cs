@@ -1,4 +1,5 @@
-﻿using EfCore.CodeFirst;
+﻿using AutoMapper.QueryableExtensions;
+using EfCore.CodeFirst;
 using EfCore.CodeFirst.DAL;
 using EfCore.CodeFirst.DTOs;
 using EfCore.CodeFirst.Mappers;
@@ -11,17 +12,21 @@ Initializer.Build();
 using (var _context = new AppDbContext())
 {
 
-    var productDto1 = _context.Products.Select(x => new ProductDto()
-    {
-        Id = x.Id,
-        Name = x.Name,
-        Price = x.Price,
-        Stock = x.Stock,
-    }).ToList();
+    //var productDto1 = _context.Products.Select(x => new ProductDto()
+    //{
+    //    Id = x.Id,
+    //    Name = x.Name,
+    //    Price = x.Price,
+    //    Stock = x.Stock,
+    //}).ToList();
 
     var product = _context.Products.ToList();
 
-    var productDto = ObjextMapper.Mapper.Map<List<ProductDto>>(product);
+    //var productDto = ObjextMapper.Mapper.Map<List<ProductDto>>(product);
+
+
+    var productDto = _context.Products.ProjectTo<ProductDto>(ObjextMapper.Mapper.ConfigurationProvider);
+
     Console.WriteLine("");
 
 
