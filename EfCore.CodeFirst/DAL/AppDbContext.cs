@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,18 @@ namespace EfCore.CodeFirst.DAL
 {
     public class AppDbContext : DbContext
     {
+        private DbConnection _dbConnection;
 
-        public  int GetProductCount(int categoryId)
+        public AppDbContext(DbConnection dbConnection)
+        {
+            _dbConnection = dbConnection;
+        }
+
+        public AppDbContext()
+        {
+        }
+
+        public int GetProductCount(int categoryId)
         {
             throw new NotSupportedException("Bu method Ef Core tarafından çalıştırılmaktadır.");
         }
@@ -20,20 +31,27 @@ namespace EfCore.CodeFirst.DAL
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
-     
 
- 
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            Initializer.Build();
-            optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging
-                .LogLevel.Information).UseSqlServer(Initializer.Configuration
-                .GetConnectionString("SqlCon"));
+            if (_dbConnection == default(DbConnection))
+            {
+                optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging
+               .LogLevel.Information).UseSqlServer(Initializer.Configuration.GetConnectionString("SqlCon"));
+            }
+            else
+            {
+                optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging
+             .LogLevel.Information).UseSqlServer(_dbConnection);
+            }
+           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-     
+
 
             base.OnModelCreating(modelBuilder);
         }
