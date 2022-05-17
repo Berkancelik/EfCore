@@ -11,14 +11,31 @@ using System.Linq;
 Initializer.Build();
 using (var _context = new AppDbContext())
 {
-    var category = new Category() { Name = "Telefonlar" };
-    _context.Categories.Add(category);
 
-    var product = _context.Products.First();
-    product.Name = "Defter 123";
-    _context.SaveChanges();
 
-    Console.WriteLine("");
+    using(var transection = _context.Database.BeginTransaction())
+    {
+        var category = new Category() { Name = "Telefonlar" };
+        _context.Categories.Add(category);
+        var product = _context.Products.First();
+        product.Name = "Defter 123";
+        Product product2 = new()
+        {
+            Name = "Defter 1",
+            Price = 100,
+            Stock = 200,
+            Barcode = 123,
+            CategoryId = category.Id
+        };
+        _context.Products.Add(product2);
+        _context.SaveChanges();
+        Console.WriteLine("");
+        transection.Commit();
+    }
+
+
+
+
 
 
 }
