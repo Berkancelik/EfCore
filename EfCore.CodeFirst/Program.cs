@@ -11,24 +11,14 @@ using System.Linq;
 Initializer.Build();
 using (var _context = new AppDbContext())
 {
+    var category = new Category() { Name = "Telefonlar" };
+    _context.Categories.Add(category);
 
-    //var productDto1 = _context.Products.Select(x => new ProductDto()
-    //{
-    //    Id = x.Id,
-    //    Name = x.Name,
-    //    Price = x.Price,
-    //    Stock = x.Stock,
-    //}).ToList();
-
-    var product = _context.Products.ToList();
-
-    //var productDto = ObjextMapper.Mapper.Map<List<ProductDto>>(product);
-
-
-    var productDto = _context.Products.ProjectTo<ProductDto>(ObjextMapper.Mapper.ConfigurationProvider);
+    var product = _context.Products.First();
+    product.Name = "Defter 123";
+    _context.SaveChanges();
 
     Console.WriteLine("");
-
 
 
 }
