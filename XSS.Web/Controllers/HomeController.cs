@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using XSS.Web.Models;
 
@@ -12,6 +13,9 @@ namespace XSS.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private HtmlEncoder _htmlEncoder;
+        private JavaScriptEncoder _jsEncoder;
+        private UrlEncoder _urlEncoder;
 
 
 
@@ -28,9 +32,12 @@ namespace XSS.Web.Controllers
             return View();
         }
 
+
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public IActionResult CommentAdd(string name, string comment)
         {
+            _urlEncoder.Encode(name);
 
             System.IO.File.AppendAllText("comment.txt", $"{ name}-{ comment}\n");
 
@@ -43,6 +50,13 @@ namespace XSS.Web.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+        }
+
+        public HomeController(ILogger<HomeController> logger, HtmlEncoder htmlEncoder, JavaScriptEncoder jsEncoder, UrlEncoder urlEncoder) : this(logger)
+        {
+            _htmlEncoder = htmlEncoder;
+            _jsEncoder = jsEncoder;
+            _urlEncoder = urlEncoder;
         }
 
         public IActionResult Index()
