@@ -17,27 +17,13 @@ using (var _context = new AppDbContext())
 {
 
 
-    using(var transection = _context.Database.BeginTransaction())
+    using (var transaction = _context.Database.BeginTransaction(System.Data.IsolationLevel.ReadUncommitted)
     {
-        var category = new Category() { Name = "Telefonlar" };
-        _context.Categories.Add(category);
         var product = _context.Products.First();
-        product.Name = "Defter 123";
-        Product product2 = new()
-        {
-            Name = "Defter 1",
-            Price = 100,
-            Stock = 200,
-            Barcode = 123,
-            CategoryId = category.Id
-        };
-        _context.Products.Add(product2);
+        product.Price = 3000;
         _context.SaveChanges();
-        Console.WriteLine("");
-        transection.Commit();
+        transaction.Commit();
     }
-
-
 
 
 

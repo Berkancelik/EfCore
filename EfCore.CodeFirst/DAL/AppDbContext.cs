@@ -14,20 +14,7 @@ namespace EfCore.CodeFirst.DAL
     {
         private DbConnection _dbConnection;
 
-        public AppDbContext(DbConnection dbConnection)
-        {
-            _dbConnection = dbConnection;
-        }
-
-        public AppDbContext()
-        {
-        }
-
-        public int GetProductCount(int categoryId)
-        {
-            throw new NotSupportedException("Bu method Ef Core tarafından çalıştırılmaktadır.");
-        }
-
+    
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
@@ -36,17 +23,11 @@ namespace EfCore.CodeFirst.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (_dbConnection == default(DbConnection))
-            {
-                optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging
-               .LogLevel.Information).UseSqlServer(Initializer.Configuration.GetConnectionString("SqlCon"));
-            }
-            else
-            {
-                optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging
-             .LogLevel.Information).UseSqlServer(_dbConnection);
-            }
-           
+            Initializer.Build();
+            optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging
+           .LogLevel.Information).UseSqlServer(Initializer.Configuration.GetConnectionString("SqlCon"));
+
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
