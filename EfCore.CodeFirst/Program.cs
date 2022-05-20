@@ -17,7 +17,7 @@ using (var _context = new AppDbContext())
 {
 
 
-    using (var transaction = _context.Database.BeginTransaction(System.Data.IsolationLevel.ReadUncommitted)
+    using (var transaction = _context.Database.BeginTransaction(System.Data.IsolationLevel.ReadUncommitted)) 
     {
         var product = _context.Products.First();
         product.Price = 3000;
