@@ -13,6 +13,33 @@ namespace XSS.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+
+
+        public IActionResult CommentAdd()
+        {
+
+            if (System.IO.File.Exists("comment.txt")){
+                ViewBag.comments = System.IO.File.ReadAllLines("comment.txt");
+            }
+
+
+            HttpContext.Response.Cookies.Append("email", "berkan@gmail.com");
+            HttpContext.Response.Cookies.Append("password", "1234");
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CommentAdd(string name, string comment)
+        {
+
+            System.IO.File.AppendAllText("comment.txt", $"{ name}-{ comment}\n");
+
+            ViewBag.name = name;
+            ViewBag.comment = comment;
+
+            return RedirectToAction("CommentAdd");
+        }
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
